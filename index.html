@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Altman Z-score Calculator</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Altman Z-score Calculator">
+  <meta name="author" content="George Kolev">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Altman Z-score Calculator</h1>
+    <h2>Developing Data Products__Course Project</h2>
+    <p>George Kolev<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Introduction</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The <b>Altman Z-score</b> formula is widely used for assessing the health of a public company and predicting the likelihood of financial distress or bankruptcy within 2 years, using data from the company&#39;s balance sheet and income statement.</p>
+
+<p>For the Coursera Data Products Course Project, I developed a Shiny app, which automates the calculation of a company&#39;s Z-score.</p>
+
+<p>The Shiny app is located at:<br>
+<a href="https://gikolev.shinyapps.io/Altman_Z-score_Calculator/">https://gikolev.shinyapps.io/Altman_Z-score_Calculator/</a></p>
+
+<p>The source code is located at:<br>
+<a href="https://github.com/gikolev/data_products_project">https://github.com/gikolev/data_products_project</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:#FFFFFF;">
+  <hgroup>
+    <h2>Using the Application</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The app requires the input of several financial metrics, and uses them to calculate and interpret the company&#39;s Z-score.</p>
+
+<p>The <b>Sample Data</b> tab contains financial parameters for two companies - Apple and Chesapeake Energy Corp. - which can be used to test the Shiny app&#39;s functionality and compare the companies&#39; Z-scores.</p>
+
+<p>Sources for confirming financial metrics include: Yahoo! Finance, Morningstar, and a company&#39;s published annual reports.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:#FFFFFF;">
+  <hgroup>
+    <h2>Derivation</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The following parameters are provided (using Apple&#39;s data as an example): </p>
+
+<pre><code class="r">WC &lt;- 8768 ## Working Capital
+TA &lt;- 290479 ## Total Assets
+RE &lt;- 92284 ## Retained Earnings
+EBIT &lt;- 72515 ## Earnings before Interest and Taxes
+MVE &lt;- 554000 ## Market Value of Equity
+TL &lt;- 171124 ## Book Value of Total Liabilities
+S &lt;- 233715 ## Sales
+</code></pre>
+
+<p>The Z-score is a linear combination of five key ratios, weighted by coefficients:</p>
+
+<pre><code class="r">Z &lt;- round(1.2*(WC/TA) + 1.4*(RE/TA) + 3.3*(EBIT/TA) + 0.6*(MVE/TL)+ 1.0*(S/TA), 2)
+print(Z)
+</code></pre>
+
+<pre><code>## [1] 4.05
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:#FFFFFF;">
+  <hgroup>
+    <h2>Interpreting the Z-score</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The level of financial distress is estimated, based on the range or &#39;zone&#39; the score falls into: </p>
+
+<p><b>Z &gt; 2.99 - Safe Zone. </b> <br>
+The company is in good financial health and not likely to experience distress or to go bankrupt within the next two years. </p>
+
+<p><b>1.81 &lt; Z &lt; 2.99 - Grey Zone.</b> </br>
+The score is inconclusive, so caution is warranted. </p>
+
+<p><b>Z &lt; 1.81 - Distress Zone.</b> </br>
+There is a high probability of financial distress or bankruptcy within the next two years.</p>
+
+<p>Unsurprisingly, Apple&#39;s Z-score at the end of 2015 indicates that it is in good financial health.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Introduction'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Using the Application'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Derivation'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Interpreting the Z-score'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
